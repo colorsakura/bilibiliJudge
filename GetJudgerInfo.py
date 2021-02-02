@@ -9,8 +9,8 @@ def GetInfo(SESSDATA):
         'cookie': test,
     }
     info=r.get(url,headers=headers)
-    print(info.text)
-    info_loads=js.loads(info.text())
+    info_loads=js.loads(info.text)
+    print(info_loads)
     status={
         1: '具有资格',
         2: '资格失效'
