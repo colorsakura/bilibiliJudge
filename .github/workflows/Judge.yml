@@ -16,7 +16,7 @@ on:
    
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu-20.04
     if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 star 来运行脚本
     steps:
     - name: Checkout
