@@ -1,6 +1,6 @@
 # 风纪委员会自动投票
 
-**脚本已经可以正常使用，感谢大家的支持！**
+请注意：关于LICENSE，在Apache-2.0的基础上增加一条：**禁止上传到CSDN等网站盈利，禁止放在某宝某鱼等平台贩卖**，否则官方找上门就**删库跑路**！
 
 本脚本通过使用Github Action来实现B站风纪委员的自动投票功能，喜欢请给我点个STAR吧！
 
@@ -165,6 +165,36 @@ KeyError: 'data'
 ```
 
 并发起issue询问（当然你能自己看懂是什么情况是最好的）
+
+##### 获取案件一节：KeyError
+
+```
+  File "Main.py", line 111, in <module>
+    Main()
+  File "Main.py", line 80, in Main
+    cid=GetNew(csrf,sessdata)
+  File "/home/runner/work/bilibiliJudge/bilibiliJudge/GetNewCase.py", line 19, in GetNew
+    result=dataloads['data']['id']
+KeyError: 'data'
+```
+
+请找到`GetNewCase.py`文件，在第17行把下面这行代码的`#`删掉，并注意对齐
+
+```python
+    dataloads=js.loads(data.text)
+    # print(dataloads)  # 第17行
+    if(dataloads['code']==25014 or dataloads['code']==25008): return True
+```
+
+删完应该像下面这样
+
+```python
+    dataloads=js.loads(data.text)
+    print(dataloads)
+    if(dataloads['code']==25014 or dataloads['code']==25008): return True
+```
+
+然后将运行结果附在issue里面询问（当然能自己解决最好）
 
 ## 免责声明
 
