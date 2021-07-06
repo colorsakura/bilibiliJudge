@@ -15,9 +15,6 @@ class VariableError(Exception):
     pass
 
 
-cannotJudge = False
-
-
 def GetAndCal(cid):
     case = GetCase(cid).text
     caseinfo = js.loads(case)
