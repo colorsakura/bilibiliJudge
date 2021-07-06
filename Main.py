@@ -13,39 +13,7 @@ import random
 class VariableError(Exception):
     pass
 
-csrf=sys.argv[1]
-sessdata=sys.argv[2]
-if(csrf=='' or sessdata==''):
-    print('必要变量未设置！程序即将退出！')
-    raise(VariableError('Essential variable(s) not available!'))
-    sys.exit()
 
-try:
-    GiveUpEnable=sys.argv[3]
-    GiveUpEnableDisplay='是'
-    if GiveUpEnable=='False':
-        GiveUpEnable=False
-        GiveUpEnableDisplay='否'
-except:
-    GiveUpEnable=True
-    GiveUpEnableDisplay='是'
-
-try:
-    delay=int(sys.argv[4])
-except:
-    delay=300
-
-try:
-    JudgeProportion=float(sys.argv[5])
-    if not(JudgeProportion<1 and JudgeProportion>0):
-        JudgeProportion=0.7
-except:
-    JudgeProportion=0.7
-
-GiveupConfig='检测到放弃选项的开启状态为：{}，判定比例为：{}%，即将开始运行判定程序！'.format(GiveUpEnableDisplay,JudgeProportion*100)
-print(GiveupConfig)
-ApplyResult=None
-cannotJudge=False
 
 def GetAndCal(cid):
     case=GetCase(cid).text
@@ -62,7 +30,40 @@ def GetAndCal(cid):
     return voteBreak,voteDelete,voteRule,caseinfo,casestatus
 
 
-def Main():
+def main():
+    csrf=sys.argv[1]
+    sessdata=sys.argv[2]
+    if(csrf=='' or sessdata==''):
+        print('必要变量未设置！程序即将退出！')
+        raise(VariableError('Essential variable(s) not available!'))
+        sys.exit()
+
+    try:
+        GiveUpEnable=sys.argv[3]
+        GiveUpEnableDisplay='是'
+        if GiveUpEnable=='False':
+            GiveUpEnable=False
+            GiveUpEnableDisplay='否'
+    except:
+        GiveUpEnable=True
+        GiveUpEnableDisplay='是'
+
+    try:
+        delay=int(sys.argv[4])
+    except:
+        delay=300
+
+    try:
+        JudgeProportion=float(sys.argv[5])
+        if not(JudgeProportion<1 and JudgeProportion>0):
+            JudgeProportion=0.7
+    except:
+        JudgeProportion=0.7
+
+    GiveupConfig='检测到放弃选项的开启状态为：{}，判定比例为：{}%，即将开始运行判定程序！'.format(GiveUpEnableDisplay,JudgeProportion*100)
+    print(GiveupConfig)
+    ApplyResult=None
+    cannotJudge=False
     Userinfo,UserinfoParsed=GetInfo(sessdata)
     print('获取到用户信息，具体如下：')
     print(UserinfoParsed)
@@ -110,4 +111,4 @@ def Main():
     
 
 if __name__ == "__main__":
-    Main()
+    main()
