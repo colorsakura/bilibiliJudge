@@ -1,8 +1,9 @@
 import json as js
 
+
 def Parse(info):
-    case=js.loads(info)['data']
-    status={
+    case = js.loads(info)['data']
+    status = {
         1: '投票中',
         2: '停止发放',
         3: '复核中（结案中）',
@@ -12,7 +13,7 @@ def Parse(info):
         7: '冻结中',
         8: '队列中'
     }
-    result=str({
+    result = str({
         '案件ID': case['id'],
         '被举报用户ID': case['mid'],
         '裁决状态': status[int(case['status'])],
@@ -22,4 +23,4 @@ def Parse(info):
         '封禁投票': case['voteBreak'],
         '合规投票': case['voteRule']
     })
-    return result,int(case['status'])
+    return result, int(case['status'])

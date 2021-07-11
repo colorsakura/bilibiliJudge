@@ -19,10 +19,8 @@ def GetAndCal(cid):
     case = GetCase(cid).text
     caseinfo = js.loads(case)
     printinfo, casestatus = Parse(case)
-    toprint = '''
-获取到风纪委员案件（ID：{}），具体信息如下：
-{}
-    '''.format(cid, printinfo)
+    toprint = '''获取到风纪委员案件（ID：{}），具体信息如下：{}''' \
+        .format(cid, printinfo)
     print(toprint)
     voteBreak = caseinfo['data']['voteBreak']
     voteDelete = caseinfo['data']['voteDelete']
@@ -70,7 +68,7 @@ def main():
     print(UserinfoParsed)
     if(Userinfo['data']['status'] == 2):
         print('检测到未具有风纪委员资格，正在尝试申请……')
-        ApplyResult,ApplyMsg=Apply(sessdata,csrf)
+        ApplyResult, ApplyMsg = Apply(sessdata, csrf)
         if(ApplyResult):
             print('风纪委员资格申请成功，正在执行脚本操作……')
         elif(not ApplyResult):
