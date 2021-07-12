@@ -6,7 +6,7 @@ from GetJudgerInfo import GetInfo
 from GetNewCase import GetNew
 from JudgementApply import Apply
 import sys
-import json as js
+import json
 import time
 import random
 
@@ -17,7 +17,7 @@ class VariableError(Exception):
 
 def GetAndCal(cid):
     case = GetCase(cid).text
-    caseinfo = js.loads(case)
+    caseinfo = json.loads(case)
     printinfo, casestatus = Parse(case)
     toprint = '''获取到风纪委员案件（ID：{}），具体信息如下：{}''' \
         .format(cid, printinfo)
@@ -32,7 +32,7 @@ def main():
     csrf = sys.argv[1]
     sessdata = sys.argv[2]
     if(csrf == '' or sessdata == ''):
-        print('必要变量未设置！程序即将退出！')
+        print('必要变量未设置！')
         raise(VariableError('Essential variable(s) not available!'))
         sys.exit()
 
@@ -58,8 +58,8 @@ def main():
     except:
         JudgeProportion = 0.7
 
-    GiveupConfig = '检测到放弃选项的开启状态为：{}，判定比例为：{}%，即将开始运行判定程序！'.format(
-        GiveUpEnableDisplay, JudgeProportion*100)
+    GiveupConfig = '检测到放弃选项的开启状态为：{}，判定比例为：{}%，即将开始运行判定程序！'\
+        .format(GiveUpEnableDisplay, JudgeProportion*100)
     print(GiveupConfig)
     ApplyResult = None
     cannotJudge = False
